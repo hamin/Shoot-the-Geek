@@ -16,6 +16,7 @@
   <% cards.forEach(function(card){ %>
     <div id="card_<%= cardCount %>">
       <h3><span class="headline"><%= card.headline %></span></h3> <i>(<%= card.num_of_views %> Views, <%= card.num_of_contributors %> Contributors, <%= card.num_of_highfives %> High 5s)</i>
+      <div>You Shot this Card: <span style="color:red;"><span id="card_id_score_<%= cardCount+1  %>">0</span> times</span></div>
       <span style="display:none;" class="num_of_views"><%= card.num_of_views %></span>
       <span style="display:none;" class="num_of_contributors"><%= card.num_of_contributors %></span>
       <span style="display:none;" class="num_of_highfives"><%= card.num_of_highfives %></span>
@@ -146,14 +147,19 @@
     //   console.(index + ': ' + value); 
     // });
     
-    for (var i = parseInt($('#user_card_num').html()); i >= 0; i--){
+    for (var i = parseInt($('#user_card_num').html()); i > 0; i--){
       console.log(i);
       // rock1 = getSpaceRock(SpaceRock.LRG_ROCK);
       // Larger Score Cards will be smaller!!!
       scale = i == 0 ? 1 : i
       rock1 = getSpaceRock(10 + (12*scale));
+      console.log("THIS IS ROCK BEING CREATED!");
+      console.log(rock1);
       rockBelt[rock1].floatOnScreen(canvas.width, canvas.height);
+      rockBelt[rock1].card_id = i
     };
+    
+    console.log(rockBelt);
     
   	
   }
@@ -246,6 +252,7 @@
   			if(!p || !p.active) { continue; }
 
   			if(o.hitPoint(p.x, p.y)) {
+          // console.log(o);
   				var newSize;
           // switch(o.size) {
           //  case SpaceRock.LRG_ROCK: newSize = SpaceRock.MED_ROCK;
@@ -276,6 +283,9 @@
           //  }
           // }
 
+          // Add score before removing
+          oldCardScore = $("#card_id_score_" + o.card_id).html();
+          $("#card_id_score_" + o.card_id).html( oldCardScore + 1);
   				//remove
   				stage.removeChild(o);
   				rockBelt[spaceRock].active = false;
