@@ -14,7 +14,7 @@
 <div id="cards" class="description">
   <% cardCount = 0 %>
   <% cards.forEach(function(card){ %>
-    <div id="card_<%= cardCount %>">
+    <div id="card_<%= cardCount %>" class="counter_corners">
       <h3><span class="headline"><%= card.headline %></span></h3> <i>(<%= card.num_of_views %> Views, <%= card.num_of_contributors %> Contributors, <%= card.num_of_highfives %> High 5s)</i>
       <div>You Shot this Card: <span style="color:red;"><span id="card_id_score_<%= cardCount+1  %>">0</span> times</span></div>
       <span style="display:none;" class="num_of_views"><%= card.num_of_views %></span>

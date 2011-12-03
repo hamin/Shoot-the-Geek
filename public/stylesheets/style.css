@@ -40,3 +40,13 @@ a:hover
 strong {
 	color: #FFF;
 }
+
+.counter_corners{
+  padding-left: 15px;
+  width: 450px;
+  color: black;
+  background-color:beige;
+  border-radius:5px;	
+  -moz-border-radius:5px;	
+  -webkit-border-radius:5px;
+}
