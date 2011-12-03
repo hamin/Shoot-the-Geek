@@ -13,14 +13,23 @@ Demo showing a simple game using vector <strong>Shapes</strong>, <strong>Text</s
 <div id="geekContainer" style="float:left;">
   <h2>Geek Name:</h2>
   <h3><%= userInfo.name %></h3>
+  <span id="username"><%= userInfo.screen_name %></span>
   <img src="<%= userInfo.avatar.large  %>" />
 </div>
 
-<script type="text/javascript" charset="utf-8">
-  $(document).ready(function() {
-    init();
-  });
-</script>
+<div id="cards">
+  <% cardCount = 0 %>
+  <% cards.forEach(function(card){ %>
+    <div id="card_<%= cardCount %>">
+      <span class="headline"><%= card.headline %></span>
+      <span class="num_of_views"><%= card.num_of_views %></span>
+      <span class="num_of_contributors"><%= card.num_of_contributors %></span>
+      <span class="num_of_highfives"><%= card.num_of_highfives %></span>
+      <span class="shorturl"><%= card.shorturl %></span>
+    </div>
+    <% cardCount += 1 %>
+  <% }) %>
+</div>  
 
 <script type="text/javascript" charset="utf-8">
   var DIFFICULTY = 2;			//how fast the game gets mor difficult
@@ -61,7 +70,7 @@ Demo showing a simple game using vector <strong>Shapes</strong>, <strong>Text</s
 
   var messageField;		//Message display field
   var scoreField;			//score Field
-
+  
   //register key functions
   document.onkeydown = handleKeyDown;
   document.onkeyup = handleKeyUp;
@@ -131,9 +140,16 @@ Demo showing a simple game using vector <strong>Shapes</strong>, <strong>Text</s
   	//ensure stage is blank and add the ship
   	stage.clear();
   	stage.addChild(ship);
-
+    
   	//start game timer
   	Ticker.addListener(window);
+  	
+    // $.each( <%= cards %>, function(index, value) { 
+    //   console.(index + ': ' + value); 
+    // });
+    
+  	rock1 = getSpaceRock(SpaceRock.LRG_ROCK);
+    rockBelt[rock1].floatOnScreen(canvas.width, canvas.height);
   }
 
   function tick() {
@@ -160,18 +176,18 @@ Demo showing a simple game using vector <strong>Shapes</strong>, <strong>Text</s
   	}
 
   	//handle new spaceRocks
-  	if(nextRock <= 0) {
-  		if(alive){
-  			timeToRock -= DIFFICULTY;	//reduce spaceRock spacing slowly to increase difficulty with time
-  			var index = getSpaceRock(SpaceRock.LRG_ROCK);
-  			var index2 = getSpaceRock(SpaceRock.LRG_ROCK);
-  			rockBelt[index].floatOnScreen(canvas.width, canvas.height);
-  			rockBelt[index2].floatOnScreen(canvas.width, canvas.height);
-  			nextRock = timeToRock + timeToRock*Math.random();
-  		}
-  	} else {
-  		nextRock--;
-  	}
+    // if(nextRock <= 0) {
+    //  if(alive){
+    //    timeToRock -= DIFFICULTY; //reduce spaceRock spacing slowly to increase difficulty with time
+    //    var index = getSpaceRock(SpaceRock.LRG_ROCK);
+    //    var index2 = getSpaceRock(SpaceRock.LRG_ROCK);
+    //    rockBelt[index].floatOnScreen(canvas.width, canvas.height);
+    //    rockBelt[index2].floatOnScreen(canvas.width, canvas.height);
+    //    nextRock = timeToRock + timeToRock*Math.random();
+    //  }
+    // } else {
+    //  nextRock--;
+    // }
 
   	//handle ship looping
   	if(alive && outOfBounds(ship, ship.bounds)) {
@@ -388,4 +404,6 @@ Demo showing a simple game using vector <strong>Shapes</strong>, <strong>Text</s
   	//trust the field will have a number and add the score
   	scoreField.text = (Number(scoreField.text) + Number(value)).toString();
   }
+  
+  init()
 </script>
