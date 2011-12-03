@@ -164,7 +164,9 @@
       		if(alive){
       			timeToRock -= DIFFICULTY;	//reduce spaceRock spacing slowly to increase difficulty with time
       			var index = getSpaceRock(SpaceRock.LRG_ROCK);
+      			var index2 = getSpaceRock(SpaceRock.LRG_ROCK);
       			rockBelt[index].floatOnScreen(canvas.width, canvas.height);
+      			rockBelt[index2].floatOnScreen(canvas.width, canvas.height);
       			nextRock = timeToRock + timeToRock*Math.random();
       		}
       	} else {
@@ -223,14 +225,15 @@
 
       			if(o.hitPoint(p.x, p.y)) {
       				var newSize;
-      				switch(o.size) {
-      					case SpaceRock.LRG_ROCK: newSize = SpaceRock.MED_ROCK;
-      						break;
-      					case SpaceRock.MED_ROCK: newSize = SpaceRock.SML_ROCK;
-      						break;
-      					case SpaceRock.SML_ROCK: newSize = 0;
-      						break;
-      				}
+              // switch(o.size) {
+              //  case SpaceRock.LRG_ROCK: newSize = SpaceRock.MED_ROCK;
+              //    break;
+              //  case SpaceRock.MED_ROCK: newSize = SpaceRock.SML_ROCK;
+              //    break;
+              //  case SpaceRock.SML_ROCK: newSize = 0;
+              //    break;
+              // }
+              newSize = 0;
 
       				//score
       				if(alive) {
@@ -238,18 +241,18 @@
       				}
 
       				//create more
-      				if(newSize > 0) {
-      					var i;
-      					var index;
-      					var offSet;
-
-      					for(i=0; i < SUB_ROCK_COUNT; i++){
-      						index = getSpaceRock(newSize);
-      						offSet = (Math.random() * o.size*2) - o.size;
-      						rockBelt[index].x = o.x + offSet;
-      						rockBelt[index].y = o.y + offSet;
-      					}
-      				}
+              // if(newSize > 0) {
+              //  var i;
+              //  var index;
+              //  var offSet;
+              // 
+              //  for(i=0; i < SUB_ROCK_COUNT; i++){
+              //    index = getSpaceRock(newSize);
+              //    offSet = (Math.random() * o.size*2) - o.size;
+              //    rockBelt[index].x = o.x + offSet;
+              //    rockBelt[index].y = o.y + offSet;
+              //  }
+              // }
 
       				//remove
       				stage.removeChild(o);
@@ -317,9 +320,9 @@
       		}
       	}
 
-      	if(len == 0) {
-      		rockBelt[0] = new SpaceRock(size);
-      	}
+        // if(len == 0) {
+        //  rockBelt[0] = new SpaceRock(size);
+        // }
 
       	stage.addChild(rockBelt[i]);
       	return i;

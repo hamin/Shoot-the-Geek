@@ -1,4 +1,5 @@
 express = require("express")
+request = require("request")
 routes = require("./routes")
 
 app = module.exports = express.createServer()
@@ -20,9 +21,17 @@ app.configure "development", ->
 
 app.configure "production", ->
   app.use express.errorHandler()
-
+    
 # Routes
-app.get "/", routes.index
+# app.get "/", routes.index
+app.get '/', (req,res) ->
+  username = if req.body.username then req.body.username else "harisamin"
+  
+  request.get url: "http://geekli.st/users/#{username}.json", json: true, (error, response, body) ->
+    userInfo = body  
+    request.get url: "http://geekli.st/#{username}/cards.json", json: true, (error2, response2, body2) ->
+      cards = body2.cards
+      res.render "index", title: "Geek vs. Geek", userInfo: userInfo, cards: cards
 
 if !module.parent
   app.listen 3000

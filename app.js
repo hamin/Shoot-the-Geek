@@ -1,6 +1,8 @@
 (function() {
-  var app, express, routes;
+  var app, express, http, request, routes;
   express = require("express");
+  request = require("request");
+  http = require("http");
   routes = require("./routes");
   app = module.exports = express.createServer();
   app.configure(function() {
