@@ -142,14 +142,9 @@
     
   	//start game timer
   	Ticker.addListener(window);
-  	
-    // $("#user_card_num").each( <%= cards %>, function(index, value) { 
-    //   console.(index + ': ' + value); 
-    // });
     
     for (var i = parseInt($('#user_card_num').html()); i > 0; i--){
       console.log(i);
-      // rock1 = getSpaceRock(SpaceRock.LRG_ROCK);
       // Larger Score Cards will be smaller!!!
       scale = i == 0 ? 1 : i
       rock1 = getSpaceRock(10 + (12*scale));
@@ -188,18 +183,31 @@
   	}
 
   	//handle new spaceRocks
-    // if(nextRock <= 0) {
-    //  if(alive){
-    //    timeToRock -= DIFFICULTY; //reduce spaceRock spacing slowly to increase difficulty with time
-    //    var index = getSpaceRock(SpaceRock.LRG_ROCK);
-    //    var index2 = getSpaceRock(SpaceRock.LRG_ROCK);
-    //    rockBelt[index].floatOnScreen(canvas.width, canvas.height);
-    //    rockBelt[index2].floatOnScreen(canvas.width, canvas.height);
-    //    nextRock = timeToRock + timeToRock*Math.random();
-    //  }
-    // } else {
-    //  nextRock--;
-    // }
+    if(nextRock <= 0) {
+     // if(alive){
+     //   timeToRock -= DIFFICULTY; //reduce spaceRock spacing slowly to increase difficulty with time
+     //   var index = getSpaceRock(SpaceRock.LRG_ROCK);
+     //   var index2 = getSpaceRock(SpaceRock.LRG_ROCK);
+     //   rockBelt[index].floatOnScreen(canvas.width, canvas.height);
+     //   rockBelt[index2].floatOnScreen(canvas.width, canvas.height);
+     //   nextRock = timeToRock + timeToRock*Math.random();
+     // }
+     for (var i = parseInt($('#user_card_num').html()); i > 0; i--){
+       timeToRock -= DIFFICULTY; //reduce spaceRock spacing slowly to increase difficulty with time
+       console.log(i);
+       // Larger Score Cards will be smaller!!!
+       scale = i == 0 ? 1 : i
+       rock1 = getSpaceRock(10 + (12*scale));
+       console.log("THIS IS ROCK BEING CREATED!");
+       console.log(rock1);
+       rockBelt[rock1].floatOnScreen(canvas.width, canvas.height);
+       rockBelt[rock1].card_id = i
+       nextRock = timeToRock + timeToRock*Math.random();
+     };
+    } else {
+     nextRock--;
+    }
+    
 
   	//handle ship looping
   	if(alive && outOfBounds(ship, ship.bounds)) {
@@ -285,7 +293,7 @@
 
           // Add score before removing
           oldCardScore = $("#card_id_score_" + o.card_id).html();
-          $("#card_id_score_" + o.card_id).html( oldCardScore + 1);
+          $("#card_id_score_" + o.card_id).html( parseInt(oldCardScore) + 1);
   				//remove
   				stage.removeChild(o);
   				rockBelt[spaceRock].active = false;
