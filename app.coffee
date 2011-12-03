@@ -25,7 +25,7 @@ app.configure "production", ->
 # Routes
 # app.get "/", routes.index
 app.get '/', (req,res) ->
-  username = if req.body.username then req.body.username else "harisamin"
+  username = if req.query.username then req.query.username else "harisamin"
   
   request.get url: "http://geekli.st/users/#{username}.json", json: true, (error, response, body) ->
     userInfo = body  
