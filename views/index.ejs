@@ -14,6 +14,7 @@ Demo showing a simple game using vector <strong>Shapes</strong>, <strong>Text</s
   <h2>Geek Name:</h2>
   <h3><%= userInfo.name %></h3>
   <span id="username"><%= userInfo.screen_name %></span>
+  <span id="user_card_num"><%= userInfo.stats.number_of_cards %></span>
   <img src="<%= userInfo.avatar.large  %>" />
 </div>
 
@@ -144,12 +145,17 @@ Demo showing a simple game using vector <strong>Shapes</strong>, <strong>Text</s
   	//start game timer
   	Ticker.addListener(window);
   	
-    // $.each( <%= cards %>, function(index, value) { 
+    // $("#user_card_num").each( <%= cards %>, function(index, value) { 
     //   console.(index + ': ' + value); 
     // });
     
-  	rock1 = getSpaceRock(SpaceRock.LRG_ROCK);
-    rockBelt[rock1].floatOnScreen(canvas.width, canvas.height);
+    for (var i = parseInt($('#user_card_num').html()); i >= 0; i--){
+      console.log(i);
+      rock1 = getSpaceRock(SpaceRock.LRG_ROCK);
+      rockBelt[rock1].floatOnScreen(canvas.width, canvas.height);
+    };
+    
+  	
   }
 
   function tick() {
