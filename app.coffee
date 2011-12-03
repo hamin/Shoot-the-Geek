@@ -39,7 +39,7 @@ app.get '/', (req,res) ->
       
       console.log "THESE ARE CARDS: #{JSON.stringify cards}"
       console.log "THESE ARE SORTED CARDS: #{JSON.stringify sortedCards}"
-      res.render "index", title: "Geek vs. Geek", userInfo: userInfo, cards: sortedCards, userString: "#{JSON.stringify(userInfo)}"
+      res.render "index", title: "Shoot the Geek!", userInfo: userInfo, cards: sortedCards, userString: "#{JSON.stringify(userInfo)}"
 
 if !module.parent
   app.listen 3000
