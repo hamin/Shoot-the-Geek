@@ -151,7 +151,10 @@ Demo showing a simple game using vector <strong>Shapes</strong>, <strong>Text</s
     
     for (var i = parseInt($('#user_card_num').html()); i >= 0; i--){
       console.log(i);
-      rock1 = getSpaceRock(SpaceRock.LRG_ROCK);
+      // rock1 = getSpaceRock(SpaceRock.LRG_ROCK);
+      // Larger Score Cards will be smaller!!!
+      scale = i == 0 ? 1 : i
+      rock1 = getSpaceRock(10 + (12*scale));
       rockBelt[rock1].floatOnScreen(canvas.width, canvas.height);
     };
     

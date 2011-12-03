@@ -31,7 +31,15 @@ app.get '/', (req,res) ->
     userInfo = body  
     request.get url: "http://geekli.st/#{username}/cards.json", json: true, (error2, response2, body2) ->
       cards = body2.cards
-      res.render "index", title: "Geek vs. Geek", userInfo: userInfo, cards: cards, userString: "#{JSON.stringify(userInfo)}"
+      # Incrementing order
+      sortByScore = (a,b) -> a.score - b.score
+      for card in cards
+        card.score = card.num_of_views + card.num_of_contributors + card.num_of_highfives
+      sortedCards = cards.sort(sortByScore)
+      
+      console.log "THESE ARE CARDS: #{JSON.stringify cards}"
+      console.log "THESE ARE SORTED CARDS: #{JSON.stringify sortedCards}"
+      res.render "index", title: "Geek vs. Geek", userInfo: userInfo, cards: sortedCards, userString: "#{JSON.stringify(userInfo)}"
 
 if !module.parent
   app.listen 3000
