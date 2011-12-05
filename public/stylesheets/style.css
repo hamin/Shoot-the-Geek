@@ -25,9 +25,13 @@ a:hover
 	text-decoration:none;
 }
 
-.canvasHolder {
+#canvasHolder {
 	width: 980px;
 	border: solid 15px #222;
+	background-color:#000000; 
+	height:600px; 
+	position:relative; 
+	float:left;
 }
 
 .description {
@@ -50,3 +54,7 @@ strong {
   -moz-border-radius:5px;	
   -webkit-border-radius:5px;
 }
+
+.clear{ clear: both; }
+.counter_corners a{ color: black; }
+.score-card{ color: red; }

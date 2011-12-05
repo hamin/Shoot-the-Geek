@@ -1,9 +1,18 @@
 <h1><%= title %></h1>
 <div class="description">
   Shoot a Geek's achievement card from Geek List! Remember, the more AWESOME the card, the smaller and HARDER it is to shoot down! :) Good Luck!
+  <br/><br/><br/>
+  
+  <form method="get" action="/">
+    <span>Geeklist Username:</span>
+    <input type="text" name="username" />
+    <input type="submit" value="Submit" />
+  </form>
+  
 <br/>
 </div>
-
+<div class="clear" style="clear:both;"></div>
+<br/>
 <div id="geekContainer" class="description" style="float:left;">
   <h2><%= userInfo.name %></h2>
   <h3><span id="username"><%= userInfo.screen_name %></span></h3>
@@ -11,12 +20,18 @@
   <img src="<%= userInfo.avatar.large  %>" />
 </div>
 
+<div class="clear"></div>
+<br/>
 <div id="cards" class="description">
+  <h3>Achievement Cards</h3>
   <% cardCount = 0 %>
   <% cards.forEach(function(card){ %>
     <div id="card_<%= cardCount %>" class="counter_corners">
-      <h3><span class="headline"><%= card.headline %></span></h3> <i>(<%= card.num_of_views %> Views, <%= card.num_of_contributors %> Contributors, <%= card.num_of_highfives %> High 5s)</i>
-      <div>You Shot this Card: <span style="color:red;"><span id="card_id_score_<%= cardCount+1  %>">0</span> times</span></div>
+      <h3><a href="<%= card.shorturl %>"><span class="headline"><%= card.headline %></span></h3></a> 
+      <i>(<%= card.num_of_views %> Views, <%= card.num_of_contributors %> Contributors, <%= card.num_of_highfives %> High 5s)</i>
+      
+      <div>You Shot this Card: <span class="score-card"><span id="card_id_score_<%= cardCount+1  %>">0</span> times</span></div>
+      
       <span style="display:none;" class="num_of_views"><%= card.num_of_views %></span>
       <span style="display:none;" class="num_of_contributors"><%= card.num_of_contributors %></span>
       <span style="display:none;" class="num_of_highfives"><%= card.num_of_highfives %></span>
@@ -26,7 +41,8 @@
   <% }) %>
 </div>
 
-<div class="canvasHolder" style="background-color:#000000; height:600px; position:relative; float:left;">
+<br/><br/>
+<div id="canvasHolder">
 	<canvas style="position:absolute; float:left" id="testCanvas" width="980px" height="600px"></canvas>
 </div>  
 
